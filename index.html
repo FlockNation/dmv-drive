@@ -1,243 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DMV Drive</title>
+  <meta charset="UTF-8">
+  <title>The DMV Drive</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1rem;
+      background-color: #5a5a5a;
+      font-family: Georgia, serif;
+      color: white;
+      margin: 0;
+      padding: 2rem;
     }
-    h1 {
-      text-align: center;
-    }
-    #login-section, #admin-section {
-      margin-bottom: 2rem;
-    }
-    .hidden {
-      display: none;
-    }
-    #posts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
-      gap: 1rem;
-    }
-    .post-square {
-      border: 1px solid #ccc;
+
+    .post-card {
+      background-color: #444;
       border-radius: 8px;
       overflow: hidden;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      height: 320px;
-      background: white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: box-shadow 0.2s ease;
       text-decoration: none;
       color: inherit;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
     }
-    .post-square:hover {
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+
+    .post-card:hover {
+      transform: scale(1.02);
     }
-    .post-title {
-      font-weight: bold;
-      font-size: 1.1rem;
-      padding: 0.5rem 0.75rem;
-      flex: 0 0 auto;
-      background: #f0f0f0;
-      text-align: center;
-    }
-    .post-image {
+
+    .post-image img {
       width: 100%;
-      height: 180px;
-      object-fit: cover;
-      flex: 1 1 auto;
-    }
-    .post-desc {
-      padding: 0.5rem 0.75rem;
-      font-size: 0.9rem;
-      color: #333;
-      flex: 0 0 auto;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-height: 4.5em; /* about 3 lines */
-    }
-    label {
       display: block;
-      margin-top: 0.5rem;
     }
-    input, textarea {
-      width: 100%;
-      padding: 0.5rem;
-      box-sizing: border-box;
+
+    .post-content {
+      padding: 1.5rem;
+    }
+
+    .post-title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin: 0 0 0.5rem;
+    }
+
+    .post-description {
       font-size: 1rem;
+      margin: 0 0 1rem;
+      color: #ccc;
     }
-    textarea {
-      resize: vertical;
-    }
-    button {
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-    #admin-section button.logout {
-      background: #ddd;
-      margin-left: 1rem;
+
+    .post-meta {
+      font-size: 0.9rem;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
 
-<h1>DMV Drive</h1>
-
-<!-- Login Screen -->
-<div id="login-section">
-  <label for="password">Enter Password to Edit:</label>
-  <input type="password" id="password" autocomplete="off" />
-  <button onclick="login()">Login</button>
-  <p id="login-msg" style="color:red;"></p>
-</div>
-
-<!-- Admin Panel -->
-<div id="admin-section" class="hidden">
-  <h2>Add New Post</h2>
-  <label for="post-title">Title (required):</label>
-  <input id="post-title" placeholder="Post title" />
-
-  <label for="post-link">Link URL (required):</label>
-  <input id="post-link" placeholder="https://example.com" />
-
-  <label for="post-image">Image URL (required):</label>
-  <input id="post-image" placeholder="https://example.com/image.jpg" />
-
-  <label for="post-content">Description (optional):</label>
-  <textarea id="post-content" rows="3" placeholder="Description or summary"></textarea>
-
-  <button onclick="addPost()">Add Post</button>
-  <button onclick="logout()" class="logout">Logout</button>
-
-  <h2>Current Posts</h2>
-  <div id="posts-grid-admin"></div>
-</div>
-
-<!-- Public posts grid -->
-<div id="posts-grid"></div>
-
-<script>
-  // CHANGE THIS to a strong password you want to use
-  const PASSWORD = "yourpassword";
-
-  let posts = JSON.parse(localStorage.getItem('dmvdrive_posts') || "[]");
-
-  const loginSection = document.getElementById('login-section');
-  const adminSection = document.getElementById('admin-section');
-  const publicPostsGrid = document.getElementById('posts-grid');
-  const adminPostsGrid = document.getElementById('posts-grid-admin');
-  const loginMsg = document.getElementById('login-msg');
-
-  function renderPublicPosts() {
-    if(posts.length === 0) {
-      publicPostsGrid.innerHTML = '<p>No posts yet.</p>';
-      return;
-    }
-    publicPostsGrid.innerHTML = '';
-    posts.forEach(({title, link, image, content}) => {
-      const a = document.createElement('a');
-      a.href = link;
-      a.target = "_blank";
-      a.rel = "noopener";
-      a.className = 'post-square';
-
-      a.innerHTML = `
-        <div class="post-title">${title}</div>
-        <img class="post-image" src="${image}" alt="${title}">
-        <div class="post-desc">${content || ''}</div>
-      `;
-      publicPostsGrid.appendChild(a);
-    });
-  }
-
-  function renderAdminPosts() {
-    if(posts.length === 0) {
-      adminPostsGrid.innerHTML = '<p>No posts yet.</p>';
-      return;
-    }
-    adminPostsGrid.innerHTML = '';
-    posts.forEach((post, i) => {
-      const postDiv = document.createElement('div');
-      postDiv.className = 'post-square';
-      postDiv.style.position = 'relative';
-
-      postDiv.innerHTML = `
-        <div class="post-title">${post.title}</div>
-        <img class="post-image" src="${post.image}" alt="${post.title}">
-        <div class="post-desc">${post.content || ''}</div>
-        <button style="
-          position: absolute; top: 5px; right: 5px; background:#f88; border:none; padding: 0.25rem 0.5rem; cursor:pointer; border-radius:3px;
-        " onclick="deletePost(${i})" title="Delete Post">X</button>
-      `;
-      adminPostsGrid.appendChild(postDiv);
-    });
-  }
-
-  function login() {
-    const inputPass = document.getElementById('password').value;
-    if(inputPass === PASSWORD) {
-      loginSection.classList.add('hidden');
-      adminSection.classList.remove('hidden');
-      loginMsg.textContent = '';
-      renderAdminPosts();
-    } else {
-      loginMsg.textContent = 'Incorrect password.';
-    }
-  }
-
-  function logout() {
-    adminSection.classList.add('hidden');
-    loginSection.classList.remove('hidden');
-    document.getElementById('password').value = '';
-  }
-
-  function addPost() {
-    const title = document.getElementById('post-title').value.trim();
-    const link = document.getElementById('post-link').value.trim();
-    const image = document.getElementById('post-image').value.trim();
-    const content = document.getElementById('post-content').value.trim();
-
-    if(!title || !link || !image) {
-      alert('Title, Link, and Image URL are required!');
-      return;
-    }
-
-    posts.unshift({title, link, image, content});
-    localStorage.setItem('dmvdrive_posts', JSON.stringify(posts));
-
-    // Clear form
-    document.getElementById('post-title').value = '';
-    document.getElementById('post-link').value = '';
-    document.getElementById('post-image').value = '';
-    document.getElementById('post-content').value = '';
-
-    renderAdminPosts();
-    renderPublicPosts();
-  }
-
-  function deletePost(index) {
-    if(confirm('Delete this post?')) {
-      posts.splice(index, 1);
-      localStorage.setItem('dmvdrive_posts', JSON.stringify(posts));
-      renderAdminPosts();
-      renderPublicPosts();
-    }
-  }
-
-  // Initial render on page load
-  renderPublicPosts();
-</script>
+  <a class="post-card" href="https://dmvdrive.substack.com/p/wizards-on-all-rookie-team-a-franchise" target="_blank">
+    <div class="post-image">
+      <img src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F6d9eac70-24fd-4bd4-84fa-1e2d2d9d99e9_960x540.png" alt="Wizards rookies and Orioles coach">
+    </div>
+    <div class="post-content">
+      <h2 class="post-title">Wizards on All-Rookie Team; A Franchise Pivot – The Last 2 Days</h2>
+      <p class="post-description">Plus a reasonable ceiling and floor for the Commanders</p>
+      <p class="post-meta">May 21 • Rohit Shukla</p>
+    </div>
+  </a>
 
 </body>
 </html>
