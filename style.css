@@ -1,59 +1,86 @@
 body {
-  background-color: #5a5a5a;
+  background-color: #555;
+  color: #eee;
   font-family: Georgia, serif;
-  color: white;
   margin: 0;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 0;
 }
 
-#featured-container, #latest-container {
-  width: 100%;
-  max-width: 800px;
+header {
+  padding: 1rem 2rem;
+  background-color: #444;
+  text-align: left;
+}
+
+.site-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+  margin: 0;
+}
+
+.container {
+  padding: 1rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.latest-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #ddd;
+}
+
+.posts-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-start;
 }
 
 .post-card {
-  background-color: #444;
+  display: flex;
+  background-color: #666;
   border-radius: 8px;
   overflow: hidden;
+  width: 100%;
+  max-width: 700px;
   text-decoration: none;
   color: inherit;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease;
-  display: flex;
-  flex-direction: column;
+  transition: background-color 0.3s;
 }
 
 .post-card:hover {
-  transform: scale(1.02);
+  background-color: #777;
 }
 
-.post-image img {
-  width: 100%;
-  height: auto;
-  display: block;
+.post-image {
+  width: 200px;
+  height: 140px;
+  object-fit: cover;
 }
 
 .post-content {
-  padding: 1.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .post-title {
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.5rem 0;
+  color: #fff;
 }
 
 .post-description {
-  font-size: 1.1rem;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
   color: #ccc;
-  margin-bottom: 1rem;
 }
 
 .post-meta {
   font-size: 0.9rem;
-  color: #aaa;
+  color: #bbb;
 }
