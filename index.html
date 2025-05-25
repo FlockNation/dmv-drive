@@ -1,72 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>The DMV Drive</title>
-  <style>
-    body {
-      background-color: #5a5a5a;
-      font-family: Georgia, serif;
-      color: white;
-      margin: 0;
-      padding: 2rem;
-    }
-
-    .post-card {
-      background-color: #444;
-      border-radius: 8px;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      max-width: 800px;
-      margin: auto;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: transform 0.2s;
-    }
-
-    .post-card:hover {
-      transform: scale(1.02);
-    }
-
-    .post-image img {
-      width: 100%;
-      display: block;
-    }
-
-    .post-content {
-      padding: 1.5rem;
-    }
-
-    .post-title {
-      font-size: 1.8rem;
-      font-weight: bold;
-      margin: 0 0 0.5rem;
-    }
-
-    .post-description {
-      font-size: 1rem;
-      margin: 0 0 1rem;
-      color: #ccc;
-    }
-
-    .post-meta {
-      font-size: 0.9rem;
-      color: #aaa;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div id="featured-container"></div>
+  <div id="latest-container"></div>
 
-  <a class="post-card" href="https://dmvdrive.substack.com/p/wizards-on-all-rookie-team-a-franchise" target="_blank">
-    <div class="post-image">
-      <img src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F6d9eac70-24fd-4bd4-84fa-1e2d2d9d99e9_960x540.png" alt="Wizards rookies and Orioles coach">
-    </div>
-    <div class="post-content">
-      <h2 class="post-title">Wizards on All-Rookie Team; A Franchise Pivot – The Last 2 Days</h2>
-      <p class="post-description">Plus a reasonable ceiling and floor for the Commanders</p>
-      <p class="post-meta">May 21 • Rohit Shukla</p>
-    </div>
-  </a>
-
+  <script src="script.js"></script>
 </body>
 </html>
