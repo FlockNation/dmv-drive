@@ -2,19 +2,19 @@
   {
     "title": "Wizards on All-Rookie Team; A Franchise Pivot – The Last 2 Days",
     "description": "Plus a reasonable ceiling and floor for the Commanders",
-    "image": "https://your-image-url.png",
-    "link": "https://dmvdrive.substack.com/p/wizards-on-all-rookie-team-a-franchise",
     "date": "May 21",
     "author": "Rohit Shukla",
+    "image": "images/wizards.png",
+    "url": "https://dmvdrive.substack.com/p/wizards-on-all-rookie-team-a-franchise",
     "featured": true
   },
   {
     "title": "Lottery Luck; Caps Bounced – The Last 2 Days",
-    "description": "An inside look into the Commanders schedule",
-    "image": "https://your-image-url2.png",
-    "link": "https://dmvdrive.substack.com/p/lottery-luck-caps-bounced",
+    "description": "An inside look into the Washington Commanders' schedule.",
     "date": "May 17",
     "author": "Rohit Shukla",
+    "image": "images/caps.png",
+    "url": "https://dmvdrive.substack.com/p/lottery-luck-caps-bounced",
     "featured": false
   }
 ]
