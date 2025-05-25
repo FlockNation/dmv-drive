@@ -2,14 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The DMV Drive</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="featured-container"></div>
-  <h2 style="color:white;">Latest</h2>
-  <div id="latest-container"></div>
+  <header>
+    <h1 class="site-title">The DMV Drive</h1>
+  </header>
 
+  <main class="container">
+    <section id="featured-post"></section>
+    <section>
+      <h2 class="latest-title">Latest</h2>
+      <div id="latest-posts" class="posts-grid"></div>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>
