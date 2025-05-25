@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DMV Drive</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 2rem auto; padding: 1rem; }
+    h1 { text-align: center; }
+    #login-section, #admin-section { margin-bottom: 2rem; }
+    .hidden { display: none; }
+    .post { border-bottom: 1px solid #ccc; margin-bottom: 1rem; padding-bottom: 1rem; }
+    .post img { max-width: 100%; height: auto; display: block; margin: 0.5rem 0; }
+    label { display: block; margin-top: 0.5rem; }
+    input, textarea { width: 100%; padding: 0.5rem; box-sizing: border-box; }
+    button { margin-top: 1rem; padding: 0.5rem 1rem; cursor: pointer; }
+    a { color: #0070f3; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<h1>DMV Drive</h1>
+
+<!-- Login Screen -->
+<div id="login-section">
+  <label for="password">Enter Password to Edit:</label>
+  <input type="password" id="password" />
+  <button onclick="login()">Login</button>
+  <p id="login-msg" style="color:red;"></p>
+</div>
+
+<!-- Admin Panel -->
+<div id="admin-section" class="hidden">
+  <h2>Add New Post</h2>
+  <label for="post-title">Title (required):</label>
+  <input id="post-title" placeholder="Post title" />
+
+  <label for="post-link">Link URL (required):</label>
+  <input id="post-link" placeholder="https://example.com" />
+
+  <label for="post-image">Image URL (optional):</label>
+  <input id="post-image" placeholder="https://example.com/image.jpg" />
+
+  <label for="post-content">Content (optional):</label>
+  <textarea id="post-content" rows="4" placeholder="Post content or summary"></textarea>
+
+  <button onclick="addPost()">Add Post</button>
+  <button onclick="logout()" style="margin-left: 1rem; background:#ddd;">Logout</button>
+
+  <h2>Current Posts</h2>
+  <div id="posts"></div>
+</div>
+
+<!-- Public posts section -->
+<div id="public-posts"></div>
+
+<script>
+  // CHANGE THIS to a strong password you want to use
+  const PASSWORD = "yourpassword";
+
+  // Load posts from localStorage or start empty
+  let posts = JSON.parse(localStorage.getItem('dmvdrive_posts') || "[]");
+
+  const loginSection = document.getElementById('login-section');
+  const adminSection = document.getElementById('admin-section');
+  const publicPostsDiv = document.getElementById('public-posts');
+
+  // Show posts to everyone
+  function renderPublicPosts() {
+    if(posts.length === 0) {
+      publicPostsDiv.innerHTML = '<p>No posts yet.</p>';
+      return;
+    }
+    let html = '<h2>Latest Posts</h2>';
+    posts.forEach(({title, link, image, content}) => {
+      html += `
+        <div class="post">
+          <h3><a href="${link}" target="_blank" rel="noopener">${title}</a></h3>
+          ${image ? `<img src="${image}" alt="${title}">` : ''}
+          ${content ? `<p>${content}</p>` : ''}
+        </div>
+      `;
+    });
+    publicPostsDiv.innerHTML = html;
+  }
+
+  // Show posts in admin with delete buttons
+  function renderAdminPosts() {
+    const postsDiv = document.getElementById('posts');
+    if(posts.length === 0) {
+      postsDiv.innerHTML = '<p>No posts yet.</p>';
+      return;
+    }
+    postsDiv.innerHTML = '';
+    posts.forEach((post, i) => {
+      const postDiv = document.createElement('div');
+      postDiv.className = 'post';
+      postDiv.innerHTML = `
+        <h3><a href="${post.link}" target="_blank" rel="noopener">${post.title}</a></h3>
+        ${post.image ? `<img src="${post.image}" alt="${post.title}">` : ''}
+        ${post.content ? `<p>${post.content}</p>` : ''}
+        <button onclick="deletePost(${i})" style="background:#f88;">Delete</button>
+      `;
+      postsDiv.appendChild(postDiv);
+    });
+  }
+
+  function login() {
+    const inputPass = document.getElementById('password').value;
+    if(inputPass === PASSWORD) {
+      loginSection.classList.add('hidden');
+      adminSection.classList.remove('hidden');
+      document.getElementById('login-msg').textContent = '';
+      renderAdminPosts();
+    } else {
+      document.getElementById('login-msg').textContent = 'Incorrect password.';
+    }
+  }
+
+  function logout() {
+    adminSection.classList.add('hidden');
+    loginSection.classList.remove('hidden');
+    document.getElementById('password').value = '';
+  }
+
+  function addPost() {
+    const title = document.getElementById('post-title').value.trim();
+    const link = document.getElementById('post-link').value.trim();
+    const image = document.getElementById('post-image').value.trim();
+    const content = document.getElementById('post-content').value.trim();
+
+    if(!title || !link) {
+      alert('Title and Link are required!');
+      return;
+    }
+
+    posts.unshift({title, link, image, content});
+    localStorage.setItem('dmvdrive_posts', JSON.stringify(posts));
+
+    // Clear form
+    document.getElementById('post-title').value = '';
+    document.getElementById('post-link').value = '';
+    document.getElementById('post-image').value = '';
+    document.getElementById('post-content').value = '';
+
+    renderAdminPosts();
+    renderPublicPosts();
+  }
+
+  function deletePost(index) {
+    if(confirm('Delete this post?')) {
+      posts.splice(index, 1);
+      localStorage.setItem('dmvdrive_posts', JSON.stringify(posts));
+      renderAdminPosts();
+      renderPublicPosts();
+    }
+  }
+
+  // Initial render of public posts on page load
+  renderPublicPosts();
+</script>
+
+</body>
+</html>
