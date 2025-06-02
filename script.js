@@ -7,7 +7,7 @@ fetch('https://api.rss2json.com/v1/api.json?rss_url=https://dmvdrive.substack.co
     const archiveContainer = document.getElementById('archive-container');
 
     const featuredPost = posts[0];
-    const latestPosts = posts.slice(1, 5);
+    const latestPosts = posts.slice(0, 5);
     const archivePosts = posts.slice(5);
 
     if (featuredPost) {
