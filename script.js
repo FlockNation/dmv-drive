@@ -4,9 +4,11 @@ fetch('https://api.rss2json.com/v1/api.json?rss_url=https://dmvdrive.substack.co
     const posts = data.items;
     const featuredContainer = document.getElementById('featured-container');
     const latestContainer = document.getElementById('latest-container');
+    const archiveContainer = document.getElementById('archive-container');
 
     const featuredPost = posts[0];
     const latestPosts = posts.slice(1, 5);
+    const archivePosts = posts.slice(5);
 
     if (featuredPost) {
       featuredContainer.innerHTML = generatePostHTML(featuredPost, true);
@@ -14,6 +16,10 @@ fetch('https://api.rss2json.com/v1/api.json?rss_url=https://dmvdrive.substack.co
 
     latestPosts.forEach(post => {
       latestContainer.innerHTML += generatePostHTML(post, false);
+    });
+
+    archivePosts.forEach(post => {
+      archiveContainer.innerHTML += generatePostHTML(post, false);
     });
   })
   .catch(error => {
@@ -32,7 +38,6 @@ function generatePostHTML(post, isFeatured) {
       day: 'numeric'
     });
   }
-
 
   const postUrl = post.link || '#';
 
