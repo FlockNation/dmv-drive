@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The DMV Drive</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header role="banner" class="site-header" tabindex="0">
+    <h1 class="site-title">The DMV Drive</h1>
+    <p class="site-subtitle">Your place for DMV (DC, Maryland, Virginia) sports news!</p>
+  </header>
+
+  <main class="container" role="main" aria-label="Main content">
+    <section id="featured-section" class="featured-section" aria-labelledby="featured-heading" tabindex="0">
+      <h2 id="featured-heading" class="latest-title">Featured Post</h2>
+      <div id="featured-container" aria-live="polite"></div>
+    </section>
+
+    <section aria-labelledby="latest-heading" tabindex="0">
+      <h2 id="latest-heading" class="latest-title">Latest Posts</h2>
+      <div id="latest-container" class="posts-grid" aria-live="polite" role="list"></div>
+    </section>
+
+    <section aria-labelledby="archive-heading" tabindex="0">
+      <h2 id="archive-heading" class="archive-title">Archive</h2>
+      <div id="archive-container" class="posts-grid" aria-live="polite" role="list"></div>
+    </section>
+  </main>
+
+  <footer role="contentinfo" class="site-footer" tabindex="0">
+    <p>&copy; <span id="year"></span> The DMV Drive. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  <script src="script.js" defer></script>
+</body>
+</html>
