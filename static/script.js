@@ -18,7 +18,6 @@ async function fetchNotes() {
     if (!response.ok) throw new Error('Network response was not ok');
     const data = await response.json();
     const notes = data.notes?.items || [];
-    // Sort by date descending (most recent first)
     notes.sort((a, b) => {
       const dateA = new Date(a.comment?.date || a.context?.timestamp || 0);
       const dateB = new Date(b.comment?.date || b.context?.timestamp || 0);
