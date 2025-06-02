@@ -52,9 +52,21 @@ header {
   width: 350px;
   height: 250px;
   flex-shrink: 0;
-  object-fit: cover;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#featured-container .post-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
 }
 
 #featured-container .post-content {
@@ -100,6 +112,7 @@ header {
 .posts-grid::-webkit-scrollbar {
   display: none;
 }
+
 .posts-grid {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -125,13 +138,26 @@ header {
 .posts-grid .post-image {
   width: 100%;
   height: 160px;
-  object-fit: cover;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.posts-grid .post-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
 }
 
 .posts-grid .post-content {
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .posts-grid .post-title {
