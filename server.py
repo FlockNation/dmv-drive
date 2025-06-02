@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__, static_folder='static')
 
-SUBSTACK_API = "https://dmvdrive.substack.com/api/v1/posts?limit=20"
+SUBSTACK_API = "https://dmvdrive.substack.com/api/v1/posts?limit=60"
 
 @app.route('/api/posts')
 def get_posts():
