@@ -10,7 +10,8 @@ SUBSTACK_API = "https://dmvdrive.substack.com/api/v1/posts?limit=20"
 def get_posts():
     resp = requests.get(SUBSTACK_API)
     if resp.status_code == 200:
-        return jsonify(resp.json())
+        posts = resp.json()
+        return jsonify({"posts": posts}) 
     else:
         return jsonify({"error": "Failed to fetch posts"}), 502
 
