@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, send_from_directory
 import json
-from scrape import scrape_substack_archive
+from backend.scrape import scrape_substack_archive
 
 app = Flask(__name__, static_folder='frontend')
 
