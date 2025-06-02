@@ -9,19 +9,27 @@
 <body>
   <header>
     <h1 class="site-title">The DMV Drive</h1>
+    <p class="site-subtitle">Essays, insights, and reflections from the road</p>
   </header>
 
-  <main class="container">
+  <main class="container" aria-label="Main content">
     <!-- Featured Post -->
-    <section id="featured-container"></section>
+    <section id="featured-container" class="featured-section" aria-label="Featured post"></section>
 
     <!-- Latest Posts -->
-    <section>
+    <section aria-label="Latest posts">
       <h2 class="latest-title">Latest</h2>
       <div id="latest-container" class="posts-grid"></div>
     </section>
   </main>
 
+  <footer>
+    <p>&copy; <span id="year"></span> The DMV Drive. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
