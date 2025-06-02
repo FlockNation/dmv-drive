@@ -128,6 +128,9 @@ function displayNotes(notes) {
   notes.forEach(item => {
     if (item.type === 'comment' && item.comment) {
       const noteUser = item.comment.name || 'Unknown user';
+      const noteHandle = (item.comment.handle || '').toLowerCase();
+      const isMainAuthor = ['Rohit Shukla', 'FlockNation'].includes(noteUser.trim().toLowerCase()) ||
+                           ['dmvdrive', 'FlockNation'].includes(noteHandle);
       const noteDate = item.comment.date
         ? new Date(item.comment.date).toLocaleString(undefined, {
             year: 'numeric', month: 'short', day: 'numeric',
@@ -144,6 +147,7 @@ function displayNotes(notes) {
             <span class="note-date">${noteDate}</span>
           </div>
           <div class="note-body">${noteBody}</div>
+          ${!isMainAuthor ? `<div class="note-restacked">Note restacked by an author</div>` : ''}
         </div>
       `;
     }
