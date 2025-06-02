@@ -39,10 +39,13 @@ function displayPosts(posts) {
 }
 
 function generatePostHTML(post, isFeatured) {
-  const imageUrl = post.imageUrl || 'images/default.png';
-  const date = new Date(post.publishedAt).toLocaleDateString(undefined, {
+  const imageUrl = post.cover_image || 'images/default.png';
+  const date = post.post_date ? new Date(post.post_date).toLocaleDateString(undefined, {
     year: 'numeric', month: 'short', day: 'numeric'
-  });
+  }) : 'Unknown date';
+  const author = (post.publishedBylines && post.publishedBylines.length > 0)
+    ? post.publishedBylines[0].name
+    : 'Unknown author';
 
   return `
     <a class="post-card" href="${post.url}" target="_blank" rel="noopener noreferrer">
@@ -50,9 +53,9 @@ function generatePostHTML(post, isFeatured) {
         <img src="${imageUrl}" alt="${post.title}" onerror="this.src='images/default.png'">
       </div>
       <div class="post-content">
-        <div class="post-title">${post.title}</div>
+        <div class="post-title">${post.title || 'Untitled'}</div>
         <div class="post-description">${post.subtitle || ''}</div>
-        <div class="post-meta">${date}</div>
+        <div class="post-meta">${date} | ${author}</div>
       </div>
     </a>
   `;
