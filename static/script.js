@@ -138,18 +138,28 @@ function displayNotes(notes) {
         : 'Unknown date';
       const noteBody = item.comment.body || '';
       const avatarUrl = item.comment.photo_url || 'images/default.png';
-      let attachmentImage = '';
+
+      let attachmentImages = '';
       if (Array.isArray(item.comment.attachments)) {
-        const imageAttachment = item.comment.attachments.find(att =>
-          att.type && att.type.includes('image') && att.url
-        );
-        if (imageAttachment) {
-          attachmentImage = `
-            <div class="note-image">
-              <img src="${imageAttachment.url}" alt="Note image" style="max-width:100%;max-height:300px;border-radius:10px;margin-top:0.5rem;">
-            </div>
-          `;
-        }
+        item.comment.attachments.forEach(att => {
+          if (att.type === "post" && att.publication) {
+            const postImage = att.publication.cover_photo_url || att.publication.logo_url;
+            if (postImage) {
+              attachmentImages += `
+                <div class="note-image">
+                  <img src="${postImage}" alt="Post cover" style="max-width:100%;max-height:300px;border-radius:10px;margin-top:0.5rem;">
+                </div>
+              `;
+            }
+          } else if (att.type === "image" && (att.imageUrl || att.url)) {
+            const imageUrl = att.imageUrl || att.url;
+            attachmentImages += `
+              <div class="note-image">
+                <img src="${imageUrl}" alt="Note image" style="max-width:100%;max-height:300px;border-radius:10px;margin-top:0.5rem;">
+              </div>
+            `;
+          }
+        });
       }
 
       html += `
@@ -160,7 +170,7 @@ function displayNotes(notes) {
             <span class="note-date">${noteDate}</span>
           </div>
           <div class="note-body">${noteBody}</div>
-          ${attachmentImage}
+          ${attachmentImages}
           ${!isMainAuthor ? `<div class="note-restacked">Note restacked by an author</div>` : ''}
         </div>
       `;
