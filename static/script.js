@@ -1,5 +1,5 @@
 const LOCAL_API = '/api/posts';
-const NOTES_API = 'https://dmvdrive.substack.com/api/v1/notes?limit=50';
+const LOCAL_NOTES_API = '/api/notes';
 
 async function fetchPosts() {
   try {
@@ -14,10 +14,10 @@ async function fetchPosts() {
 
 async function fetchNotes() {
   try {
-    const response = await fetch(NOTES_API);
+    const response = await fetch(LOCAL_NOTES_API);
     if (!response.ok) throw new Error('Network response was not ok');
     const data = await response.json();
-    displayNotes(data.items || []);
+    displayNotes(data.notes?.items || []);
   } catch (error) {
     console.error('Failed to fetch notes:', error);
     const notesTab = document.getElementById('notes-tab');
