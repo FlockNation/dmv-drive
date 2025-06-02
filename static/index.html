@@ -10,32 +10,53 @@
   <header role="banner" class="site-header" tabindex="0">
     <h1 class="site-title">The DMV Drive</h1>
     <p class="site-subtitle">Your place for DMV (DC, Maryland, Virginia) sports news!</p>
+    <nav class="site-tabs" aria-label="Main site navigation">
+      <ul>
+        <li><button class="tab-btn active" data-tab="posts-tab" id="tab-posts">Posts</button></li>
+        <li><button class="tab-btn" data-tab="notes-tab" id="tab-notes">Notes</button></li>
+        <li><button class="tab-btn" data-tab="interest-tab" id="tab-interest">Interest Forms</button></li>
+      </ul>
+    </nav>
   </header>
 
   <main class="container" role="main" aria-label="Main content">
-    <section id="featured-section" class="featured-section" aria-labelledby="featured-heading" tabindex="0">
-      <div class="featured-wrapper">
-        <h2 id="featured-heading" class="latest-title">
-          Welcome to the DMV Drive! Check out the Featured Post
-        </h2>
-        <div id="featured-container" aria-live="polite"></div>
-      </div>
-    </section>
+    <div id="posts-tab" class="tab-content active">
+      <section id="featured-section" class="featured-section" aria-labelledby="featured-heading" tabindex="0">
+        <div class="featured-wrapper">
+          <h2 id="featured-heading" class="latest-title">
+            Welcome to the DMV Drive! Check out the Featured Post
+          </h2>
+          <div id="featured-container" aria-live="polite"></div>
+        </div>
+      </section>
 
-    <section aria-labelledby="latest-heading" tabindex="0">
-      <h2 id="latest-heading" class="latest-title">Latest Posts</h2>
-      <div id="latest-container" class="posts-grid" aria-live="polite" role="list"></div>
-    </section>
+      <section aria-labelledby="latest-heading" tabindex="0">
+        <h2 id="latest-heading" class="latest-title">Latest Posts</h2>
+        <div id="latest-container" class="posts-grid" aria-live="polite" role="list"></div>
+      </section>
 
-    <section aria-labelledby="archive-heading" tabindex="0">
-      <h2 id="archive-heading" class="archive-title">Archive</h2>
-      <div id="archive-container" class="posts-grid" aria-live="polite" role="list"></div>
-    </section>
+      <section aria-labelledby="archive-heading" tabindex="0">
+        <h2 id="archive-heading" class="archive-title">Archive</h2>
+        <div id="archive-container" class="posts-grid" aria-live="polite" role="list"></div>
+      </section>
 
-    <section aria-labelledby="collaborations-heading" tabindex="0">
-      <h2 id="latest-heading" class="collaborations-title">Collaborations</h2>
-      <div id="collaborations-container" class="posts-grid" aria-live="polite" role="list"></div>
-    </section>
+      <section aria-labelledby="collaborations-heading" tabindex="0">
+        <h2 id="collaborations-heading" class="collaborations-title">Collaborations</h2>
+        <div id="collaborations-container" class="posts-grid" aria-live="polite" role="list"></div>
+      </section>
+    </div>
+    <div id="notes-tab" class="tab-content" style="display:none;">
+      <section>
+        <h2>Notes</h2>
+        <p>Notes content coming soon...</p>
+      </section>
+    </div>
+    <div id="interest-tab" class="tab-content" style="display:none;">
+      <section>
+        <h2>Interest Form</h2>
+        <p>Interest form coming soon...</p>
+      </section>
+    </div>
   </main>
 
   <footer role="contentinfo" class="site-footer" tabindex="0">
@@ -44,6 +65,21 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Tab switching logic
+    document.querySelectorAll('.tab-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        // Remove active from all buttons
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        // Hide all tab contents
+        document.querySelectorAll('.tab-content').forEach(tc => tc.style.display = 'none');
+        // Add active to clicked button
+        btn.classList.add('active');
+        // Show corresponding tab content
+        const tabId = btn.getAttribute('data-tab');
+        document.getElementById(tabId).style.display = '';
+      });
+    });
   </script>
   <script src="/script.js" defer></script>
 </body>
