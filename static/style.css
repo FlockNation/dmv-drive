@@ -325,3 +325,32 @@ header {
     flex: 0 0 80vw;
   }
 }
+
+.site-tabs ul {
+  list-style: none;
+  margin: 1rem 0 0 0;
+  padding: 0;
+  display: flex;
+  gap: 1rem;
+}
+.site-tabs li {
+  margin: 0;
+}
+.tab-btn {
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 0.5em 1.5em;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+.tab-btn.active,
+.tab-btn:hover {
+  background: #ffeb3b;
+  color: #333;
+}
+.tab-content {
+  margin-top: 0;
+}
