@@ -3,7 +3,8 @@ import json
 from backend.scrape import scrape_substack_archive
 import os
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # backend folder
+POSTS_FILE = os.path.join(BASE_DIR, "posts.json")
 FRONTEND_DIR = os.path.join(BASE_DIR, '..', 'frontend')
 
 app = Flask(__name__, static_folder=FRONTEND_DIR)
@@ -11,7 +12,7 @@ app = Flask(__name__, static_folder=FRONTEND_DIR)
 @app.route("/api/posts")
 def get_posts():
     try:
-        with open(os.path.join(BASE_DIR, "posts.json"), "r") as f:
+        with open(POSTS_FILE, "r") as f:
             posts = json.load(f)
         return jsonify(posts)
     except Exception as e:
