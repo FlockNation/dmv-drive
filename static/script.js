@@ -48,7 +48,7 @@ function generatePostHTML(post, isFeatured) {
     : 'Unknown author';
 
   return `
-    <a class="post-card" href="${post.url}" target="_blank" rel="noopener noreferrer">
+    <a class="post-card" href="${post.canonical_url}" target="_blank" rel="noopener noreferrer">
       <div class="post-image">
         <img src="${imageUrl}" alt="${post.title}" onerror="this.src='images/default.png'">
       </div>
