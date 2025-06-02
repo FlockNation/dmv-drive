@@ -1,5 +1,8 @@
-fetch('http://localhost:5000/api/posts')
-  .then(response => response.json())
+fetch('/api/posts')
+  .then(response => {
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    return response.json();
+  })
   .then(posts => {
     if (!posts || posts.length === 0) {
       console.error("No posts found");
@@ -17,10 +20,12 @@ fetch('http://localhost:5000/api/posts')
       featuredContainer.innerHTML = generatePostHTML(featuredPost, true);
     }
 
+    latestContainer.innerHTML = '';
     latestPosts.forEach(post => {
       latestContainer.innerHTML += generatePostHTML(post, false);
     });
 
+    archiveContainer.innerHTML = '';
     archivePosts.forEach(post => {
       archiveContainer.innerHTML += generatePostHTML(post, false);
     });
