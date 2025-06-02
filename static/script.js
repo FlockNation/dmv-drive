@@ -25,24 +25,19 @@ function displayPosts(posts) {
     return;
   }
 
-  // Collaboration logic: a post is a collaboration if there are multiple authors or the title/description mentions "Collab"
   const isCollaboration = post => {
-    // Try to support both possible field names for bylines
     const bylines = post.publishedBylines || post.authors || [];
-    // If there are more than one author/byline, it's a collab
     if (Array.isArray(bylines) && bylines.length > 1) return true;
-    // Otherwise, check for collab/collaboration in title or subtitle
     const lowerTitle = (post.title || '').toLowerCase();
     const lowerSubtitle = (post.subtitle || '').toLowerCase();
     return lowerTitle.includes('collab') || lowerTitle.includes('collaboration') ||
            lowerSubtitle.includes('collab') || lowerSubtitle.includes('collaboration');
   };
 
-  const featuredPost = posts[0];
+  const featuredPost = posts[1];
   const latestPosts = posts.slice(0, 5);
   const archivePosts = posts;
 
-  // Collaboration posts
   const collaborationPosts = posts.filter(isCollaboration);
 
   featuredContainer.innerHTML = generatePostHTML(featuredPost, true);
@@ -58,7 +53,6 @@ function displayPosts(posts) {
     archiveContainer.innerHTML += generatePostHTML(post, false);
   });
 
-  // Render collaborations if section exists
   if (collaborationsContainer) {
     if (collaborationPosts.length === 0) {
       collaborationsContainer.innerHTML = '<p>No collaborations yet.</p>';
