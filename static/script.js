@@ -37,7 +37,6 @@ function displayPosts(posts) {
   const featuredPost = posts[1];
   const latestPosts = posts.slice(0, 5);
   const archivePosts = posts;
-
   const collaborationPosts = posts.filter(isCollaboration);
 
   featuredContainer.innerHTML = generatePostHTML(featuredPost, true);
@@ -66,7 +65,7 @@ function displayPosts(posts) {
 
 function generatePostHTML(post, isFeatured) {
   const imageUrl = post.cover_image || post.cover_photo_url || 'images/default.png';
-  const date = post.post_date || post.content_date
+  const date = (post.post_date || post.content_date)
     ? new Date(post.post_date || post.content_date).toLocaleDateString(undefined, {
         year: 'numeric', month: 'short', day: 'numeric'
       })
