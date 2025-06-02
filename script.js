@@ -25,13 +25,14 @@ function generatePostHTML(post, isFeatured) {
 
   function formatDate(dateStr) {
     const date = new Date(dateStr);
-    return date.toLocaleDateString('en-US', {
+    date.setDate(date.getDate() - 1);
+    return date.toLocaleDateString(undefined, {
       year: 'numeric',
       month: 'short',
-      day: 'numeric',
-      timeZone: 'UTC'
+      day: 'numeric'
     });
   }
+
 
   const postUrl = post.link || '#';
 
