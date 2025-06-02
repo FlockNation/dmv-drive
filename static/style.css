@@ -203,7 +203,7 @@ header {
 #archive-container .post-description {
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
-  color: #ccc;
+  color: #ddd;
   flex-grow: 1;
 }
 
@@ -237,7 +237,7 @@ header {
   flex: 0 0 300px;
   display: flex;
   flex-direction: column;
-  background-color: #6c5ce7;
+  background-color: #666;
   border-radius: 10px;
   overflow: hidden;
   text-decoration: none;
