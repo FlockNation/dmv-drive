@@ -3,8 +3,7 @@ import json
 from backend.scrape import scrape_substack_archive
 import os
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # backend folder
-POSTS_FILE = os.path.join(BASE_DIR, "posts.json")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FRONTEND_DIR = os.path.join(BASE_DIR, '..', 'frontend')
 
 app = Flask(__name__, static_folder=FRONTEND_DIR)
@@ -12,7 +11,7 @@ app = Flask(__name__, static_folder=FRONTEND_DIR)
 @app.route("/api/posts")
 def get_posts():
     try:
-        with open(POSTS_FILE, "r") as f:
+        with open(os.path.join(BASE_DIR, "backend/posts.json"), "r") as f:
             posts = json.load(f)
         return jsonify(posts)
     except Exception as e:
@@ -25,10 +24,7 @@ def trigger_scrape():
 
 @app.route('/')
 def serve_frontend():
-    try:
-        return send_from_directory(app.static_folder, 'index.html')
-    except Exception as e:
-        return f"Error serving index.html: {e}", 500
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/<path:path>')
 def serve_static(path):
