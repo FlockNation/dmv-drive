@@ -13,7 +13,7 @@
     <nav class="site-tabs" aria-label="Main site navigation">
       <ul>
         <li><button class="tab-btn active" data-tab="posts-tab" id="tab-posts">Posts</button></li>
-        <li><button class="tab-btn active" data-tab="about-tab" id="tab-posts">About Us</button></li>
+        <li><button class="tab-btn" data-tab="about-tab" id="tab-about">About Us</button></li>
         <li><button class="tab-btn" data-tab="notes-tab" id="tab-notes">Notes</button></li>
         <li><button class="tab-btn" data-tab="interest-tab" id="tab-interest">Interest Forms</button></li>
       </ul>
@@ -24,9 +24,7 @@
     <div id="posts-tab" class="tab-content active">
       <section id="featured-section" class="featured-section" aria-labelledby="featured-heading" tabindex="0">
         <div class="featured-wrapper">
-          <h2 id="featured-heading" class="latest-title">
-            Welcome to the DMV Drive! Check out the Featured Post
-          </h2>
+          <h2 id="featured-heading" class="latest-title">Welcome to the DMV Drive! Check out the Featured Post</h2>
           <div id="featured-container" aria-live="polite"></div>
         </div>
       </section>
@@ -41,17 +39,55 @@
         <div id="archive-container" class="posts-grid" aria-live="polite" role="list"></div>
       </section>
 
+      <section id="about-us" style="padding: 2rem; color: #fff; background-color: #555;">
+        <h2 style="font-size: 2rem;">Why subscribe?</h2>
+        <p>Subscribe to support The DMV Drive and stay up-to-date with teams in the DMV.</p>
+
+        <h2 style="font-size: 2rem;">Join the subscriber chat</h2>
+        <p>Our subscriber chat is active and will be welcome to all. However, please follow common sense rules when posting on it.</p>
+
+        <h3 style="margin-top: 2rem;">People</h3>
+        <div class="people-cards">
+          <a href="https://substack.com/@dmvdrive" class="person-card" target="_blank" rel="noopener noreferrer">
+            <img src="images/dmv_logo.png" alt="Rohit Shukla" class="person-avatar" onerror="this.src='images/default.png'">
+            <div class="person-info">
+              <h4>Rohit Shukla</h4>
+              <p class="person-handle">@DMVDRIVE</p>
+              <p>I reside in Western Maryland. Creator of The DMV Drive. Fan of all DMV teams and Penn State.</p>
+            </div>
+          </a>
+
+          <a href="https://substack.com/@flocknation" class="person-card" target="_blank" rel="noopener noreferrer">
+            <img src="images/default.png" alt="FlockNation" class="person-avatar" onerror="this.src='images/default.png'">
+            <div class="person-info">
+              <h4>FlockNation</h4>
+              <p class="person-handle">@FLOCKNATION</p>
+              <p>I'm a fan of the Ravens and most VA teams. I am a writer for The DMV Drive.</p>
+            </div>
+          </a>
+        </div>
+      </section>
+
       <section aria-labelledby="collaborations-heading" tabindex="0">
         <h2 id="collaborations-heading" class="collaborations-title">Collaborations</h2>
         <div id="collaborations-container" class="posts-grid" aria-live="polite" role="list"></div>
       </section>
     </div>
+
+    <div id="about-tab" class="tab-content" style="display:none;">
+      <section>
+        <h2>About Us</h2>
+        <p>About content coming soon...</p>
+      </section>
+    </div>
+
     <div id="notes-tab" class="tab-content" style="display:none;">
       <section>
         <h2>View our latest Notes</h2>
         <p>Notes content coming soon...</p>
       </section>
     </div>
+
     <div id="interest-tab" class="tab-content" style="display:none;">
       <section>
         <h2>Interest Form</h2>
@@ -67,13 +103,13 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    document.querySelectorAll('.tab-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.querySelectorAll('.tab-content').forEach(tc => tc.style.display = 'none');
         btn.classList.add('active');
         const tabId = btn.getAttribute('data-tab');
-        document.getElementById(tabId).style.display = '';
+        document.getElementById(tabId).style.display = 'block';
       });
     });
   </script>
