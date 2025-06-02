@@ -1,8 +1,5 @@
 fetch('/api/posts')
-  .then(response => {
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-    return response.json();
-  })
+  .then(response => response.json())
   .then(posts => {
     if (!posts || posts.length === 0) {
       console.error("No posts found");
@@ -20,12 +17,10 @@ fetch('/api/posts')
       featuredContainer.innerHTML = generatePostHTML(featuredPost, true);
     }
 
-    latestContainer.innerHTML = '';
     latestPosts.forEach(post => {
       latestContainer.innerHTML += generatePostHTML(post, false);
     });
 
-    archiveContainer.innerHTML = '';
     archivePosts.forEach(post => {
       archiveContainer.innerHTML += generatePostHTML(post, false);
     });
@@ -35,7 +30,7 @@ fetch('/api/posts')
   });
 
 function generatePostHTML(post, isFeatured) {
-  const imageUrl = post.image || extractImageFromContent(post.description || '') || 'images/default.png';
+  const imageUrl = post.image || 'images/default.png';
 
   function formatDate(dateStr) {
     if (!dateStr) return 'Unknown date';
@@ -68,11 +63,4 @@ function stripHTML(html) {
   const div = document.createElement("div");
   div.innerHTML = html;
   return div.textContent || div.innerText || "";
-}
-
-function extractImageFromContent(htmlContent) {
-  const div = document.createElement('div');
-  div.innerHTML = htmlContent;
-  const img = div.querySelector('img');
-  return img ? img.src : null;
 }
