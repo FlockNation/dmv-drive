@@ -285,13 +285,13 @@ header {
 #collaborations-container .post-description {
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
-  color: #ffeaa7;
+  color: #ddd;
   flex-grow: 1;
 }
 
 #collaborations-container .post-meta {
   font-size: 0.8rem;
-  color: #ffeb3b;
+  color: #ddd;
   text-align: right;
 }
 
