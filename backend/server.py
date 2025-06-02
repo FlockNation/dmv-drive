@@ -3,12 +3,16 @@ import json
 from backend.scrape import scrape_substack_archive
 import os
 
-app = Flask(__name__, static_folder='frontend')
+# Use absolute path to frontend folder
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FRONTEND_DIR = os.path.join(BASE_DIR, '..', 'frontend')
+
+app = Flask(__name__, static_folder=FRONTEND_DIR)
 
 @app.route("/api/posts")
 def get_posts():
     try:
-        with open("backend/posts.json", "r") as f:
+        with open(os.path.join(BASE_DIR, "posts.json"), "r") as f:
             posts = json.load(f)
         return jsonify(posts)
     except Exception as e:
@@ -21,15 +25,18 @@ def trigger_scrape():
 
 @app.route('/')
 def serve_frontend():
-    return send_from_directory(app.static_folder, 'index.html')
+    try:
+        return send_from_directory(app.static_folder, 'index.html')
+    except Exception as e:
+        return f"Error serving index.html: {e}", 500
 
 @app.route('/<path:path>')
 def serve_static(path):
-    # Secure serving of static files
+    # Prevent directory traversal attacks
     if '..' in path or path.startswith('/'):
         abort(404)
-    file_path = os.path.join(app.static_folder, path)
-    if os.path.exists(file_path):
+    full_path = os.path.join(app.static_folder, path)
+    if os.path.exists(full_path):
         return send_from_directory(app.static_folder, path)
     else:
         abort(404)
