@@ -94,7 +94,6 @@ function generatePostHTML(post, isFeatured) {
   `;
 }
 
-
 async function fetchNotes() {
   try {
     const response = await fetch(LOCAL_NOTES_API);
@@ -129,8 +128,8 @@ function displayNotes(notes) {
     if (item.type === 'comment' && item.comment) {
       const noteUser = item.comment.name || 'Unknown user';
       const noteHandle = (item.comment.handle || '').toLowerCase();
-      const isMainAuthor = ['Rohit Shukla', 'FlockNation'].includes(noteUser.trim().toLowerCase()) ||
-                           ['dmvdrive', 'FlockNation'].includes(noteHandle);
+      const isMainAuthor = ['rohit shukla', 'flocknation'].includes(noteUser.trim().toLowerCase()) ||
+                           ['dmvdrive', 'flocknation'].includes(noteHandle);
       const noteDate = item.comment.date
         ? new Date(item.comment.date).toLocaleString(undefined, {
             year: 'numeric', month: 'short', day: 'numeric',
@@ -138,15 +137,30 @@ function displayNotes(notes) {
           })
         : 'Unknown date';
       const noteBody = item.comment.body || '';
-      const photoUrl = item.comment.photo_url || 'images/default.png';
+      const avatarUrl = item.comment.photo_url || 'images/default.png';
+      let attachmentImage = '';
+      if (Array.isArray(item.comment.attachments)) {
+        const imageAttachment = item.comment.attachments.find(att =>
+          att.type && att.type.includes('image') && att.url
+        );
+        if (imageAttachment) {
+          attachmentImage = `
+            <div class="note-image">
+              <img src="${imageAttachment.url}" alt="Note image" style="max-width:100%;max-height:300px;border-radius:10px;margin-top:0.5rem;">
+            </div>
+          `;
+        }
+      }
+
       html += `
         <div class="note-card">
           <div class="note-header">
-            <img src="${photoUrl}" alt="${noteUser}" class="note-avatar" onerror="this.src='images/default.png'">
+            <img src="${avatarUrl}" alt="${noteUser}" class="note-avatar" onerror="this.src='images/default.png'">
             <span class="note-user">${noteUser}</span>
             <span class="note-date">${noteDate}</span>
           </div>
           <div class="note-body">${noteBody}</div>
+          ${attachmentImage}
           ${!isMainAuthor ? `<div class="note-restacked">Note restacked by an author</div>` : ''}
         </div>
       `;
