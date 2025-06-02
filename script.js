@@ -25,10 +25,11 @@ function generatePostHTML(post, isFeatured) {
 
   function formatDate(dateStr) {
     const date = new Date(dateStr);
-    return date.toLocaleDateString(undefined, {
+    return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
-      day: 'numeric'
+      day: 'numeric',
+      timeZone: 'UTC'
     });
   }
 
