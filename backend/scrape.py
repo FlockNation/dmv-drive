@@ -1,31 +1,27 @@
 import requests
-from bs4 import BeautifulSoup
 import json
 import os
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-POSTS_FILE = os.path.join(BASE_DIR, "posts.json")
-
-def scrape_substack_archive():
-    url = "https://dmvdrive.substack.com/archive"
+def scrape_substack_archive(limit=50, offset=0):
+    url = f"https://dmvdrive.substack.com/api/v1/posts/?limit={limit}&offset={offset}"
     response = requests.get(url)
-    soup = BeautifulSoup(response.text, "html.parser")
+    response.raise_for_status()
+    data = response.json()
+
     posts = []
-
-    for post in soup.select("a[href^='/p/']"):
-        title = post.get_text(strip=True)
-        href = post['href']
-        full_url = f"https://dmvdrive.substack.com{href}"
-        date_element = post.find_next("time")
-        date = date_element['datetime'] if date_element else 'Unknown'
-
+    for post in data.get('posts', []):
         posts.append({
-            "title": title,
-            "link": full_url,
-            "pubDate": date
+            "title": post.get("title"),
+            "link": post.get("postUrl"),
+            "pubDate": post.get("publishedAt"),
+            "description": post.get("previewContent"),
+            "author": post.get("author", {}).get("name"),
+            "image": post.get("imageUrl"),
         })
 
-    with open(POSTS_FILE, "w") as f:
+    # Make sure backend folder exists
+    os.makedirs("backend", exist_ok=True)
+    with open("backend/posts.json", "w") as f:
         json.dump(posts, f, indent=2)
 
 if __name__ == "__main__":
