@@ -1,4 +1,4 @@
-fetch('https://api.rss2json.com/v1/api.json?rss_url=https://dmvdrive.substack.com/feed')
+fetch('https://api.rss2json.com/v1/api.json?rss_url=https://dmvdrive.substack.com/feed&count=100')
   .then(response => response.json())
   .then(data => {
     const posts = data.items;
@@ -8,7 +8,7 @@ fetch('https://api.rss2json.com/v1/api.json?rss_url=https://dmvdrive.substack.co
 
     const featuredPost = posts[0];
     const latestPosts = posts.slice(0, 5);
-    const archivePosts = posts.slice(5);
+    const archivePosts = posts.slice(0);
 
     if (featuredPost) {
       featuredContainer.innerHTML = generatePostHTML(featuredPost, true);
