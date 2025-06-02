@@ -354,3 +354,70 @@ header {
 .tab-content {
   margin-top: 0;
 }
+
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.note-card {
+  width: 90vw;
+  max-width: 700px;
+  min-width: 260px;
+  min-height: 110px;
+  background-color: #666;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  padding: 1.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 auto;
+}
+
+.note-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.note-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #222;
+}
+
+.note-user {
+  font-weight: bold;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.note-date {
+  color: #bbb;
+  font-size: 0.95rem;
+  margin-left: 1rem;
+}
+
+.note-body {
+  color: #eee;
+  font-size: 1.15rem;
+  margin-top: 0.25rem;
+  word-break: break-word;
+}
+
+@media (max-width: 600px) {
+  .note-card {
+    max-width: 98vw;
+    padding: 1rem 0.5rem;
+  }
+  .notes-list {
+    gap: 1.2rem;
+  }
+}
