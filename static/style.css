@@ -332,6 +332,7 @@ header {
   padding: 0;
   display: flex;
   gap: 1rem;
+  justify-content: center;
 }
 .site-tabs li {
   margin: 0;
