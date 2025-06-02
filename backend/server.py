@@ -3,7 +3,6 @@ import json
 from backend.scrape import scrape_substack_archive
 import os
 
-# Use absolute path to frontend folder
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FRONTEND_DIR = os.path.join(BASE_DIR, '..', 'frontend')
 
@@ -32,7 +31,6 @@ def serve_frontend():
 
 @app.route('/<path:path>')
 def serve_static(path):
-    # Prevent directory traversal attacks
     if '..' in path or path.startswith('/'):
         abort(404)
     full_path = os.path.join(app.static_folder, path)
