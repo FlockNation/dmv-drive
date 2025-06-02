@@ -41,7 +41,7 @@ header {
 
 #featured-section .latest-title {
   position: absolute;
-  top: 48px;
+  top: 72px;
   left: 3px;
   z-index: 2;
   background: rgba(34, 34, 34, 0.85);
