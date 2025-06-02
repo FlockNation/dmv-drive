@@ -1,8 +1,8 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_from_directory
 import json
 from scrape import scrape_substack_archive
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='frontend')
 
 @app.route("/api/posts")
 def get_posts():
@@ -18,5 +18,13 @@ def trigger_scrape():
     scrape_substack_archive()
     return jsonify({"status": "scraped"}), 200
 
+@app.route('/')
+def serve_frontend():
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/<path:path>')
+def serve_static(path):
+    return send_from_directory(app.static_folder, path)
+
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000)
