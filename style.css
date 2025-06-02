@@ -107,15 +107,12 @@ header {
   gap: 1rem;
   padding-bottom: 0.5rem;
   -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .posts-grid::-webkit-scrollbar {
   display: none;
-}
-
-.posts-grid {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
 .posts-grid .post-card {
@@ -188,13 +185,17 @@ header {
 
 #archive-container {
   display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
   gap: 1rem;
-  overflow-x: hidden;
   padding-bottom: 0.5rem;
   -webkit-overflow-scrolling: touch;
-  position: relative;
-  width: 100%;
-  box-sizing: border-box;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+#archive-container::-webkit-scrollbar {
+  display: none;
 }
 
 #archive-container .post-card {
@@ -257,31 +258,6 @@ header {
   font-size: 0.8rem;
   color: #bbb;
   text-align: right;
-}
-
-@keyframes scrollRightLeft {
-  0% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(calc(-100% + 100vw));
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-#archive-container {
-  animation: scrollRightLeft 40s linear infinite;
-}
-
-#archive-container::-webkit-scrollbar {
-  display: none;
-}
-
-#archive-container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
 @media (max-width: 768px) {
