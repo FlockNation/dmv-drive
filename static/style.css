@@ -354,6 +354,8 @@ header {
 }
 .tab-content {
   margin-top: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .notes-list {
