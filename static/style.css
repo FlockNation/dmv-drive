@@ -32,26 +32,33 @@ header {
 }
 
 .featured-wrapper {
-  position: relative;
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
 
 #featured-section .latest-title {
-  position: absolute;
-  top: 72px;
-  left: 3px;
-  z-index: 2;
+  position: static;
+  display: block;
+  margin: 0 auto 1.5rem auto;
+  text-align: center;
   background: rgba(34, 34, 34, 0.85);
-  padding: 0.4em 1em;
+  padding: 0.4em 1.5em;
   border-radius: 0.5em;
   color: #fff;
   font-size: 2rem;
   font-weight: bold;
   box-shadow: 0 2px 12px rgba(0,0,0,0.4);
   pointer-events: none;
+  width: fit-content;
+}
+
+#featured-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 #featured-container .post-card {
@@ -309,8 +316,6 @@ header {
 
   #featured-section .latest-title {
     font-size: 1.3rem;
-    top: 10px;
-    left: 10px;
     padding: 0.3em 0.8em;
   }
 
