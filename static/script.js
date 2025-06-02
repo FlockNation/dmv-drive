@@ -142,12 +142,12 @@ function displayNotes(notes) {
       let attachmentImages = '';
       if (Array.isArray(item.comment.attachments)) {
         item.comment.attachments.forEach(att => {
-          if (att.type === "post" && att.publication) {
-            const postImage = att.publication.cover_photo_url || att.publication.logo_url;
-            if (postImage) {
+          if (att.type === "post" && att.post) {
+            const postCover = att.post.cover_image || att.post.cover_photo_url || (att.publication && att.publication.logo_url);
+            if (postCover) {
               attachmentImages += `
                 <div class="note-image">
-                  <img src="${postImage}" alt="Post cover" style="max-width:100%;max-height:300px;border-radius:10px;margin-top:0.5rem;">
+                  <img src="${postCover}" alt="Post cover image" style="max-width:100%;max-height:300px;border-radius:10px;margin-top:0.5rem;">
                 </div>
               `;
             }
