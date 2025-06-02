@@ -24,6 +24,15 @@ fetch('https://api.rss2json.com/v1/api.json?rss_url=https://dmvdrive.substack.co
 function generatePostHTML(post, isFeatured) {
   const imageUrl = post.image || extractImageFromContent(post.content) || 'images/default.png';
 
+  function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+  }
+
   return `
     <a class="post-card" href="${post.url}" target="_blank">
       <div class="post-image">
@@ -32,7 +41,7 @@ function generatePostHTML(post, isFeatured) {
       <div class="post-content">
         <div class="post-title">${post.title}</div>
         <div class="post-description">${post.description}</div>
-        <div class="post-meta">${post.date} • ${post.author}</div>
+        <div class="post-meta">${formatDate(post.pubDate)} • ${post.author}</div>
       </div>
     </a>
   `;
