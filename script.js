@@ -1,8 +1,8 @@
-const SUBSTACK_API = 'https://dmvdrive.substack.com/api/v1/posts?limit=20';
+const LOCAL_API = '/api/posts';
 
 async function fetchPosts() {
   try {
-    const response = await fetch(SUBSTACK_API);
+    const response = await fetch(LOCAL_API);
     if (!response.ok) throw new Error('Network response was not ok');
     const data = await response.json();
     displayPosts(data.posts || []);
