@@ -5,7 +5,6 @@ fetch('https://api.rss2json.com/v1/api.json?rss_url=https://dmvdrive.substack.co
     const featuredContainer = document.getElementById('featured-container');
     const latestContainer = document.getElementById('latest-container');
 
-   
     const featuredPost = posts[0];
     const latestPosts = posts.slice(1, 5);
 
@@ -33,8 +32,10 @@ function generatePostHTML(post, isFeatured) {
     });
   }
 
+  const postUrl = post.link || '#';
+
   return `
-    <a class="post-card" href="${post.url}" target="_blank">
+    <a class="post-card" href="${postUrl}" target="_blank" rel="noopener noreferrer">
       <div class="post-image">
         <img src="${imageUrl}" alt="${post.title}" onerror="this.src='images/default.png'">
       </div>
