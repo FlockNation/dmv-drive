@@ -523,16 +523,25 @@ header {
   background-color: #189c28;
 }
 
-.form-group {
-  margin-bottom: 2em;
-}
-
 .form-group h2 {
   font-size: 1.35em;
   font-weight: bold;
   margin-bottom: 0.5em;
   margin-top: 0;
-  color: #222;
+  color: #fff;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 2em auto;
 }
 
 .form-group input,
