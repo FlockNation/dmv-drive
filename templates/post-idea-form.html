@@ -8,16 +8,7 @@
 <body>
   <main>
     <h2>Post Idea Form</h2>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul class="flashes">
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-    <form action="/submit-post-idea-form" method="POST">
+    <form action="https://formspree.io/f/manjykal" method="POST">
       <div class="form-group">
         <h2>Name</h2>
         <input type="text" name="name" required>
