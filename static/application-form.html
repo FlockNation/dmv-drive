@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Writer Application Form - The DMV Drive</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main>
+    <h2>DMV Drive Application Form</h2>
+    <form action="/submit-application-form" method="POST">
+      <label>Name (and username on Substack): <input type="text" name="name" required></label><br>
+      <label>Email: <input type="email" name="email" required></label><br>
+      <label>Tell us about your writing experience: <textarea name="experience" required></textarea></label><br>
+      <label>Why do you want to write for The DMV Drive? <textarea name="reason" required></textarea></label><br>
+      <button type="submit" class="green-button">Submit</button>
+    </form>
+  </main>
+</body>
+</html>
