@@ -65,7 +65,7 @@ function displayPosts(posts) {
 }
 
 function generatePostHTML(post, isFeatured) {
-  const imageUrl = post.cover_image || post.cover_photo_url || 'images/default.png';
+  const imageUrl = post.cover_image || post.cover_photo_url || '/static/images/default.png';
   const date = (post.post_date || post.content_date)
     ? new Date(post.post_date || post.content_date).toLocaleDateString(undefined, {
         year: 'numeric', month: 'short', day: 'numeric'
