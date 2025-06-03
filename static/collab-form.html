@@ -9,10 +9,22 @@
   <main>
     <h2>Collaboration Interest Form</h2>
     <form action="/submit-collab-form" method="POST">
-      <label>Name: <input type="text" name="name" required></label><br>
-      <label>Email: <input type="email" name="email" required></label><br>
-      <label>Username on Substack: <input type="text" name="organization"></label><br>
-      <label>Message, also tell a potential idea for collaboration: <textarea name="message" required></textarea></label><br>
+      <div class="form-group">
+        <h2>Name (and username on Substack)</h2>
+        <input type="text" name="name" required>
+      </div>
+      <div class="form-group">
+        <h2>Email</h2>
+        <input type="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <h2>Organization on Substack</h2>
+        <input type="text" name="organization">
+      </div>
+      <div class="form-group">
+        <h2>Message</h2>
+        <textarea name="message" required></textarea>
+      </div>
       <button type="submit" class="green-button">Submit</button>
     </form>
   </main>
