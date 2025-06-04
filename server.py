@@ -1,12 +1,12 @@
-from flask import Flask, request, render_template, redirect, url_for, flash, jsonify, send_from_directory
-import requests
 import os
+import requests
+from flask import Flask, jsonify, send_from_directory, render_template, redirect, url_for, flash
 
-app = Flask(__name__, static_folder='static', template_folder='templates')
-app.secret_key = "your_secret_key"
+app = Flask(__name__, static_folder='static')
+app.secret_key = os.environ.get("SECRET_KEY", "secret")
 
-SUBSTACK_API_POSTS = "https://dmvdrive.substack.com/api/v1/posts?limit=50"
-SUBSTACK_API_NOTES = "https://dmvdrive.substack.com/api/v1/notes?limit=50"
+SUBSTACK_API_POSTS = "https://substack.com/api/v1/publishers/dmvdrive/posts"
+SUBSTACK_API_NOTES = "https://substack.com/api/v1/publishers/dmvdrive/notes"
 
 @app.route('/api/posts')
 def get_posts():
@@ -29,9 +29,9 @@ def serve_static(path):
     return send_from_directory(app.static_folder, path)
 
 @app.route('/contact-form.html', methods=['GET'])
-def collab_form():
+def contact_form():
     return render_template('contact-form.html')
-    
+
 @app.route('/collab-form.html', methods=['GET'])
 def collab_form():
     return render_template('collab-form.html')
@@ -48,7 +48,7 @@ def application_form():
 def submit_contact_form():
     flash("Thank you for contacting us! We'll be in touch soon.")
     return redirect(url_for('contact_form'))
-    
+
 @app.route('/submit-collab-form', methods=['POST'])
 def submit_collab_form():
     flash("Thank you for your collaboration interest! We'll be in touch soon.")
