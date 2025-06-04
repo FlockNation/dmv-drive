@@ -5,8 +5,8 @@ from flask import Flask, jsonify, send_from_directory, render_template, redirect
 app = Flask(__name__, static_folder='static')
 app.secret_key = os.environ.get("SECRET_KEY", "secret")
 
-SUBSTACK_API_POSTS = "https://substack.com/api/v1/publishers/dmvdrive/posts"
-SUBSTACK_API_NOTES = "https://substack.com/api/v1/publishers/dmvdrive/notes"
+SUBSTACK_API_POSTS = "https://substack.com/api/v1/publishers/dmvdrive/posts?limit=50"
+SUBSTACK_API_NOTES = "https://substack.com/api/v1/publishers/dmvdrive/notes?limit=50"
 
 @app.route('/api/posts')
 def get_posts():
