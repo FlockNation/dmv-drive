@@ -8,16 +8,21 @@
 </head>
 <body>
   <header role="banner" class="site-header" tabindex="0">
-    <h1 class="site-title">The DMV Drive</h1>
-    <p class="site-subtitle">Your place for DMV (DC, Maryland, Virginia) sports news!</p>
-    <nav class="site-tabs" aria-label="Main site navigation">
-      <ul>
-        <li><button class="tab-btn active" data-tab="posts-tab" id="tab-posts">Posts</button></li>
-        <li><button class="tab-btn" data-tab="about-tab" id="tab-about">About Us</button></li>
-        <li><button class="tab-btn" data-tab="notes-tab" id="tab-notes">Notes</button></li>
-        <li><button class="tab-btn" data-tab="interest-tab" id="tab-interest">Contact Forms</button></li>
-      </ul>
-    </nav>
+    <div class="header-flex">
+      <div class="header-main">
+        <h1 class="site-title">The DMV Drive</h1>
+        <p class="site-subtitle">Your place for DMV (DC, Maryland, Virginia) sports news!</p>
+        <nav class="site-tabs" aria-label="Main site navigation">
+          <ul>
+            <li><button class="tab-btn active" data-tab="posts-tab" id="tab-posts">Posts</button></li>
+            <li><button class="tab-btn" data-tab="about-tab" id="tab-about">About Us</button></li>
+            <li><button class="tab-btn" data-tab="notes-tab" id="tab-notes">Notes</button></li>
+            <li><button class="tab-btn" data-tab="interest-tab" id="tab-interest">Contact Forms</button></li>
+          </ul>
+        </nav>
+      </div>
+      <img src="/static/images/logo.png" alt="The DMV Drive Logo" class="site-logo">
+    </div>
   </header>
 
   <main class="container" role="main" aria-label="Main content">
@@ -30,17 +35,14 @@
           <div id="featured-container" aria-live="polite"></div>
         </div>
       </section>
-
       <section aria-labelledby="latest-heading" tabindex="0">
         <h2 id="latest-heading" class="latest-title">Latest Posts</h2>
         <div id="latest-container" class="posts-grid" aria-live="polite" role="list"></div>
       </section>
-
       <section aria-labelledby="archive-heading" tabindex="0">
         <h2 id="archive-heading" class="archive-title">Archive</h2>
         <div id="archive-container" class="posts-grid" aria-live="polite" role="list"></div>
       </section>
-
       <section aria-labelledby="collaborations-heading" tabindex="0">
         <h2 id="collaborations-heading" class="collaborations-title">Collaborations</h2>
         <div id="collaborations-container" class="posts-grid" aria-live="polite" role="list"></div>
@@ -52,14 +54,11 @@
         <h2 style="font-size: 2rem;">Why subscribe?</h2>
         <p>Subscribe to support The DMV Drive and stay up-to-date with teams in the DMV.</p>
         <button class="subscribe-button" onclick="window.open('https://dmvdrive.substack.com/subscribe', '_blank')">Subscribe</button>
-
         <h2 style="font-size: 2rem;">Join the subscriber chat</h2>
         <p>Our subscriber chat is active and will be welcome to all. However, please follow common sense rules when posting on it. </p>
         <button class="chat-button" onclick="window.open('https://substack.com/chat/4467844?utm_source=pub-nav-bar', '_blank')">Join Chat</button>
-        
         <h2 style="font-size: 2rem;">Authors</h2>
         <div class="people-cards">
-
           <a href="https://substack.com/@dmvdrive" class="person-card" target="_blank" rel="noopener noreferrer">
             <img src="/static/images/r.png" alt="Rohit Shukla" class="person-avatar" onerror="this.src='/static/images/r.png'">
             <div class="person-info">
@@ -68,7 +67,6 @@
               <p>I reside in Western Maryland. Creator of The DMV Drive. Fan of all DMV teams and Penn State.</p>
             </div>
           </a>
-
           <a href="https://substack.com/@flocknation" class="person-card" target="_blank" rel="noopener noreferrer">
             <img src="/static/images/f.png" alt="FlockNation" class="person-avatar" onerror="this.src='/static/images/f.png'">
             <div class="person-info">
@@ -77,7 +75,6 @@
               <p>I'm a fan of the Ravens and most VA teams. I am a writer for The DMV Drive.</p>
             </div>
           </a>
-
         </div>
       </section>
     </div>
@@ -119,7 +116,6 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
