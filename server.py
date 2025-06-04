@@ -28,6 +28,10 @@ def serve_index():
 def serve_static(path):
     return send_from_directory(app.static_folder, path)
 
+@app.route('/contact-form.html', methods=['GET'])
+def collab_form():
+    return render_template('contact-form.html')
+    
 @app.route('/collab-form.html', methods=['GET'])
 def collab_form():
     return render_template('collab-form.html')
@@ -40,6 +44,11 @@ def post_idea_form():
 def application_form():
     return render_template('application-form.html')
 
+@app.route('/submit-contact-form', methods=['POST'])
+def submit_contact_form():
+    flash("Thank you for contacting us! We'll be in touch soon.")
+    return redirect(url_for('contact_form'))
+    
 @app.route('/submit-collab-form', methods=['POST'])
 def submit_collab_form():
     flash("Thank you for your collaboration interest! We'll be in touch soon.")
