@@ -35,7 +35,7 @@ function displayPosts(posts) {
            lowerSubtitle.includes('collab') || lowerSubtitle.includes('collaboration');
   };
 
-  const featuredPost = posts[1];
+  const featuredPost = posts[0];
   const latestPosts = posts.slice(0, 5);
   const archivePosts = posts;
   const collaborationPosts = posts.filter(isCollaboration);
