@@ -128,7 +128,7 @@ function displayNotes(notes) {
     if (item.type === 'comment' && item.comment) {
       const noteUser = item.comment.name || 'Unknown user';
       const noteHandle = (item.comment.handle || '').toLowerCase();
-      const isMainAuthor = ['rohit shukla', 'flocknation'].includes(noteUser.trim().toLowerCase()) ||
+      const isMainAuthor = ['rs', 'flocknation'].includes(noteUser.trim().toLowerCase()) ||
                            ['dmvdrive', 'flocknation'].includes(noteHandle);
       const noteDate = item.comment.date
         ? new Date(item.comment.date).toLocaleString(undefined, {
